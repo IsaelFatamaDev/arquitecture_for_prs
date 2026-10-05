@@ -1,0 +1,261 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 920" width="1240" height="920" role="img" aria-labelledby="title desc">
+  <title id="title">PRS2 Via Academy: comunicación entre capas (hexagonal)</title>
+  <desc id="desc">Animación del caso de uso BorrowCopy del contexto library: la petición cruza gateway, filtro tenant, controller, puerto de entrada y caso de uso; el dominio Loan aplica sus reglas; los puertos de salida llegan a PostgreSQL y a people-directory; la respuesta vuelve como DTO y los errores como Problem Details.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #0f172a; }
+      .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
+      .title { font: 700 22px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #f1f5f9; }
+      .subtitle { font: 400 13px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #94a3b8; }
+      .name { font: 700 13px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #f8fafc; letter-spacing: .4px; }
+      .cls { font: 400 10px Consolas, 'Courier New', monospace; fill: #cbd5e1; }
+      .info { font: 400 10.5px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #94a3b8; }
+      .tag { font: 600 10px Consolas, 'Courier New', monospace; }
+      .note { font: 600 10.5px 'Segoe UI', Helvetica, Arial, sans-serif; }
+      .legend { font: 400 12px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #cbd5e1; }
+      .legendb { font: 700 12px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #e2e8f0; }
+      .rule { font: 400 12px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #94a3b8; }
+      .chip { font: 700 11px Consolas, 'Courier New', monospace; fill: #0f172a; }
+
+      .flow { fill: none; stroke-width: 3; stroke-dasharray: 8 7; animation: dash 1.2s linear infinite; }
+      .flow.req { stroke: #475569; }
+      .flow.res { stroke: #0f766e; }
+      .flow.rem { stroke: #64748b; }
+      .flow.dom { stroke: #15803d; }
+      .flow.err { stroke: #b91c1c; stroke-dasharray: 3 7; animation-duration: 2.4s; }
+      @keyframes dash { to { stroke-dashoffset: -30; } }
+
+      .glow { fill: none; stroke-width: 7; opacity: 0; animation: glow 13.5s ease-in-out infinite; }
+      @keyframes glow {
+        0% { opacity: 0; }
+        2.0% { opacity: .95; }
+        6.7% { opacity: .95; }
+        9.3% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      .d0 { animation-delay: 0.0s; }
+      .d1 { animation-delay: 0.9s; }
+      .d2 { animation-delay: 1.8s; }
+      .d3 { animation-delay: 2.7s; }
+      .d4 { animation-delay: 3.6s; }
+      .d5 { animation-delay: 4.5s; }
+      .d6 { animation-delay: 5.4s; }
+      .d7 { animation-delay: 6.3s; }
+      .d8 { animation-delay: 7.2s; }
+      .d9 { animation-delay: 8.1s; }
+      .d10 { animation-delay: 9.0s; }
+      .d11 { animation-delay: 9.9s; }
+      .d12 { animation-delay: 10.8s; }
+      .d13 { animation-delay: 11.7s; }
+      .d14 { animation-delay: 12.6s; }
+    </style>
+    <marker id="ar-req" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
+    <marker id="ar-res" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#14b8a6"/></marker>
+    <marker id="ar-rem" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker>
+    <marker id="ar-dom" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22c55e"/></marker>
+    <marker id="ar-err" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ef4444"/></marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1240" height="920" rx="18"/>
+  <rect class="frame" x="1" y="1" width="1238" height="918" rx="18"/>
+  <rect x="32" y="26" width="162" height="24" rx="12" fill="#22d3ee"/>
+  <text class="chip" x="113.0" y="42.5" text-anchor="middle">PRS2 · VIA ACADEMY</text>
+  <text class="title" x="210" y="45" text-anchor="start">Comunicación entre capas · arquitectura hexagonal</text>
+  <text class="subtitle" x="32" y="76" text-anchor="start">Ejemplo del contexto library: caso de uso BorrowCopy. Cada frontera tiene su propio DTO y su mapper; el préstamo valida a la persona en people-directory.</text>
+  <text class="subtitle" x="32" y="96" text-anchor="start">Raíz: pe.edu.vallegrande.viaacademy.&lt;contexto&gt; · persistence/postgres (entity) o persistence/mongo (document) según el contexto · TenantId desde el claim tenant_id.</text>
+
+  <!-- Capas -->
+  <rect x="168" y="126" width="448" height="632" rx="14" fill="#818cf8" opacity=".06"/>
+  <text class="tag" x="392.0" y="144" text-anchor="middle" fill="#818cf8">INFRASTRUCTURE · adapter/in</text>
+  <rect x="624" y="126" width="448" height="632" rx="14" fill="#f59e0b" opacity=".06"/>
+  <text class="tag" x="848.0" y="144" text-anchor="middle" fill="#f59e0b">APPLICATION · ports + use cases   /   DOMAIN</text>
+  <rect x="1080" y="126" width="144" height="632" rx="14" fill="#14b8a6" opacity=".06"/>
+  <text class="tag" x="1152.0" y="144" text-anchor="middle" fill="#14b8a6">ADAPTER/OUT</text>
+
+  <!-- Conectores -->
+  <path id="main" class="flow req" d="M152,240 H934" marker-end="url(#ar-req)"/>
+  <path id="dom_dn" class="flow dom" d="M834,280 V358" marker-end="url(#ar-dom)"/>
+  <path id="dom_up" class="flow dom" d="M862,360 V282" marker-end="url(#ar-dom)"/>
+  <path id="http" class="flow rem" d="M1064,240 H1086" marker-end="url(#ar-rem)"/>
+  <path id="rem_dn" class="flow rem" d="M1138,280 V358" marker-end="url(#ar-rem)"/>
+  <path id="rem_up" class="flow res" d="M1166,360 V282" marker-end="url(#ar-res)"/>
+  <path id="repo" class="flow req" d="M1000,280 V358" marker-end="url(#ar-req)"/>
+  <path id="db" class="flow req" d="M1000,440 V518" marker-end="url(#ar-req)"/>
+  <path id="out" class="flow res" d="M848,440 V518" marker-end="url(#ar-res)"/>
+  <path id="ret" class="flow res" d="M784,560 H100 V282" marker-end="url(#ar-res)"/>
+  <path id="err_dom" class="flow err" d="M784,414 H772 V704 H610" marker-end="url(#ar-err)"/>
+  <path id="err_rem" class="flow err" d="M1152,440 V720 H610" marker-end="url(#ar-err)"/>
+  <path id="err_cli" class="flow err" d="M480,708 H76 V282" marker-end="url(#ar-err)"/>
+  <text class="note" x="828" y="326" text-anchor="end" fill="#86efac">invoca reglas</text>
+  <text class="note" x="868" y="326" text-anchor="start" fill="#86efac">agregado válido</text>
+  <text class="note" x="1132" y="326" text-anchor="end" fill="#a5b4fc">RemoteRequest</text>
+  <text class="note" x="1172" y="326" text-anchor="start" fill="#5eead4">Response</text>
+  <text class="note" x="1008" y="490" text-anchor="start" fill="#e2e8f0">SQL R2DBC</text>
+  <text class="note" x="840" y="490" text-anchor="end" fill="#5eead4">Output</text>
+  <text class="note" x="392" y="552" text-anchor="middle" fill="#5eead4">Response DTO · 200 / 201</text>
+  <text class="note" x="766" y="664" text-anchor="end" fill="#f87171">DomainException</text>
+  <text class="note" x="1144" y="712" text-anchor="end" fill="#f87171">DependencyUnavailable</text>
+  <text class="note" x="300" y="701" text-anchor="middle" fill="#f87171">Problem Details 4xx / 5xx</text>
+
+  <!-- Paquetes -->
+  <circle r="5" fill="#22d3ee"><animateMotion dur="6.5s" repeatCount="indefinite" begin="-0.00s"><mpath href="#main"/></animateMotion></circle>
+  <circle r="5" fill="#22d3ee"><animateMotion dur="6.5s" repeatCount="indefinite" begin="-1.62s"><mpath href="#main"/></animateMotion></circle>
+  <circle r="5" fill="#22d3ee"><animateMotion dur="6.5s" repeatCount="indefinite" begin="-3.25s"><mpath href="#main"/></animateMotion></circle>
+  <circle r="5" fill="#22d3ee"><animateMotion dur="6.5s" repeatCount="indefinite" begin="-4.88s"><mpath href="#main"/></animateMotion></circle>
+  <circle r="4" fill="#4ade80"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#dom_dn"/></animateMotion></circle>
+  <circle r="4" fill="#86efac"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#dom_up"/></animateMotion></circle>
+  <circle r="4" fill="#a5b4fc"><animateMotion dur="0.8s" repeatCount="indefinite" begin="-0.00s"><mpath href="#http"/></animateMotion></circle>
+  <circle r="4" fill="#a5b4fc"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#rem_dn"/></animateMotion></circle>
+  <circle r="4" fill="#5eead4"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#rem_up"/></animateMotion></circle>
+  <circle r="4" fill="#22d3ee"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#repo"/></animateMotion></circle>
+  <circle r="4" fill="#22d3ee"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#db"/></animateMotion></circle>
+  <circle r="4" fill="#5eead4"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#out"/></animateMotion></circle>
+  <circle r="4" fill="#5eead4"><animateMotion dur="5.0s" repeatCount="indefinite" begin="-0.00s"><mpath href="#ret"/></animateMotion></circle>
+  <circle r="4" fill="#5eead4"><animateMotion dur="5.0s" repeatCount="indefinite" begin="-2.50s"><mpath href="#ret"/></animateMotion></circle>
+  <circle r="4" fill="#f87171"><animateMotion dur="4.0s" repeatCount="indefinite" begin="-0.00s"><mpath href="#err_dom"/></animateMotion></circle>
+  <circle r="4" fill="#f87171"><animateMotion dur="4.6s" repeatCount="indefinite" begin="-0.00s"><mpath href="#err_rem"/></animateMotion></circle>
+  <circle r="4" fill="#f87171"><animateMotion dur="4.2s" repeatCount="indefinite" begin="-0.00s"><mpath href="#err_cli"/></animateMotion></circle>
+
+  <!-- Cajas -->
+  <rect class="glow d0" x="24" y="200" width="128" height="80" rx="12" stroke="#64748b"/>
+  <rect x="24" y="200" width="128" height="80" rx="12" fill="#1e293b" stroke="#64748b" stroke-width="2" stroke-dasharray="5 4"/>
+  <text class="name" x="88.0" y="222" text-anchor="middle">CLIENTE</text>
+  <text class="cls" x="88.0" y="239" text-anchor="middle">web / móvil</text>
+  <text class="info" x="88.0" y="271" text-anchor="middle">Bearer JWT</text>
+  <rect class="glow d1" x="176" y="200" width="128" height="80" rx="12" stroke="#38bdf8"/>
+  <rect x="176" y="200" width="128" height="80" rx="12" fill="#0c2233" stroke="#38bdf8" stroke-width="2"/>
+  <text class="name" x="240.0" y="222" text-anchor="middle">API GATEWAY</text>
+  <text class="cls" x="240.0" y="239" text-anchor="middle">viaacademy.gateway</text>
+  <text class="info" x="240.0" y="271" text-anchor="middle">JWT · CORS · rutas</text>
+  <rect x="167.9" y="181" width="144.2" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="240.0" y="192" text-anchor="middle" fill="#7dd3fc">gateway/infrastructure</text>
+  <rect class="glow d2" x="328" y="200" width="128" height="80" rx="12" stroke="#818cf8"/>
+  <rect x="328" y="200" width="128" height="80" rx="12" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
+  <text class="name" x="392.0" y="222" text-anchor="middle">WEB FILTER</text>
+  <text class="cls" x="392.0" y="239" text-anchor="middle">TenantContext</text>
+  <text class="cls" x="392.0" y="252" text-anchor="middle">WebFilter</text>
+  <text class="info" x="392.0" y="271" text-anchor="middle">JWT → TenantId</text>
+  <rect x="332.1" y="181" width="119.8" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="392.0" y="192" text-anchor="middle" fill="#a5b4fc">infrastructure/web</text>
+  <rect class="glow d3" x="480" y="200" width="128" height="80" rx="12" stroke="#818cf8"/>
+  <rect x="480" y="200" width="128" height="80" rx="12" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
+  <text class="name" x="544.0" y="222" text-anchor="middle">CONTROLLER</text>
+  <text class="cls" x="544.0" y="239" text-anchor="middle">LoanController</text>
+  <text class="info" x="544.0" y="271" text-anchor="middle">Request → Input</text>
+  <rect x="493.2" y="181" width="101.5" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="544.0" y="192" text-anchor="middle" fill="#a5b4fc">adapter/in/rest</text>
+  <rect class="glow d4" x="632" y="200" width="128" height="80" rx="12" stroke="#f59e0b"/>
+  <rect x="632" y="200" width="128" height="80" rx="12" fill="#2a1f0a" stroke="#f59e0b" stroke-width="2"/>
+  <text class="name" x="696.0" y="222" text-anchor="middle">PORT IN</text>
+  <text class="cls" x="696.0" y="239" text-anchor="middle">BorrowCopyUseCase</text>
+  <text class="info" x="696.0" y="271" text-anchor="middle">interface</text>
+  <rect x="669.6" y="181" width="52.7" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="696.0" y="192" text-anchor="middle" fill="#fbbf24">port/in</text>
+  <rect class="glow d5" x="784" y="200" width="128" height="80" rx="12" stroke="#f59e0b"/>
+  <rect x="784" y="200" width="128" height="80" rx="12" fill="#2a1f0a" stroke="#f59e0b" stroke-width="2"/>
+  <text class="name" x="848.0" y="222" text-anchor="middle">USE CASE</text>
+  <text class="cls" x="848.0" y="239" text-anchor="middle">BorrowCopyUseCaseImpl</text>
+  <text class="info" x="848.0" y="271" text-anchor="middle">orquesta puertos</text>
+  <rect x="785.0" y="181" width="125.9" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="848.0" y="192" text-anchor="middle" fill="#fbbf24">application/usecase</text>
+  <rect class="glow d6" x="784" y="360" width="128" height="80" rx="12" stroke="#22c55e"/>
+  <rect x="784" y="360" width="128" height="80" rx="12" fill="#0b2a17" stroke="#22c55e" stroke-width="2"/>
+  <text class="name" x="848.0" y="382" text-anchor="middle">DOMAIN</text>
+  <text class="cls" x="848.0" y="399" text-anchor="middle">Loan · CopyId</text>
+  <text class="cls" x="848.0" y="412" text-anchor="middle">DueDate · TenantId</text>
+  <text class="info" x="848.0" y="431" text-anchor="middle">reglas · invariantes</text>
+  <rect x="806.4" y="341" width="83.2" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="848.0" y="352" text-anchor="middle" fill="#86efac">domain/model</text>
+  <rect class="glow d7" x="936" y="200" width="128" height="80" rx="12" stroke="#f59e0b"/>
+  <rect x="936" y="200" width="128" height="80" rx="12" fill="#2a1f0a" stroke="#f59e0b" stroke-width="2"/>
+  <text class="name" x="1000.0" y="222" text-anchor="middle">PORT OUT</text>
+  <text class="cls" x="1000.0" y="239" text-anchor="middle">LoanRepositoryPort</text>
+  <text class="cls" x="1000.0" y="252" text-anchor="middle">PeopleClientPort</text>
+  <rect x="970.6" y="181" width="58.8" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="1000.0" y="192" text-anchor="middle" fill="#fbbf24">port/out</text>
+  <rect class="glow d8" x="936" y="360" width="128" height="80" rx="12" stroke="#14b8a6"/>
+  <rect x="936" y="360" width="128" height="80" rx="12" fill="#062a27" stroke="#14b8a6" stroke-width="2"/>
+  <text class="name" x="1000.0" y="382" text-anchor="middle">PERSISTENCE</text>
+  <text class="cls" x="1000.0" y="399" text-anchor="middle">LoanPersistence</text>
+  <text class="cls" x="1000.0" y="412" text-anchor="middle">Adapter</text>
+  <text class="info" x="1000.0" y="431" text-anchor="middle">LoanEntity · mapper</text>
+  <rect x="924.9" y="341" width="150.3" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="1000.0" y="352" text-anchor="middle" fill="#5eead4">adapter/out/persistence</text>
+  <rect class="glow d9" x="936" y="520" width="128" height="80" rx="12" stroke="#c0c7d1"/>
+  <rect x="936" y="520" width="128" height="80" rx="12" fill="#111827" stroke="#c0c7d1" stroke-width="2"/>
+  <text class="name" x="1000.0" y="542" text-anchor="middle">POSTGRESQL</text>
+  <text class="cls" x="1000.0" y="559" text-anchor="middle">db_library</text>
+  <text class="cls" x="1000.0" y="572" text-anchor="middle">R2DBC</text>
+  <text class="info" x="1000.0" y="591" text-anchor="middle">TenantCriteria</text>
+  <rect class="glow d10" x="1088" y="200" width="128" height="80" rx="12" stroke="#14b8a6"/>
+  <rect x="1088" y="200" width="128" height="80" rx="12" fill="#062a27" stroke="#14b8a6" stroke-width="2"/>
+  <text class="name" x="1152.0" y="222" text-anchor="middle">HTTP ADAPTER</text>
+  <text class="cls" x="1152.0" y="239" text-anchor="middle">PeopleWeb</text>
+  <text class="cls" x="1152.0" y="252" text-anchor="middle">ClientAdapter</text>
+  <text class="info" x="1152.0" y="271" text-anchor="middle">timeout · CB · retry</text>
+  <rect x="1098.2" y="181" width="107.6" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="1152.0" y="192" text-anchor="middle" fill="#5eead4">adapter/out/http</text>
+  <rect class="glow d11" x="1088" y="360" width="128" height="80" rx="12" stroke="#94a3b8"/>
+  <rect x="1088" y="360" width="128" height="80" rx="12" fill="#111827" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 4"/>
+  <text class="name" x="1152.0" y="382" text-anchor="middle">OTRO MS</text>
+  <text class="cls" x="1152.0" y="399" text-anchor="middle">people-directory</text>
+  <text class="info" x="1152.0" y="431" text-anchor="middle">GET /people/{id}</text>
+  <rect class="glow d12" x="784" y="520" width="128" height="80" rx="12" stroke="#f59e0b"/>
+  <rect x="784" y="520" width="128" height="80" rx="12" fill="#2a1f0a" stroke="#f59e0b" stroke-width="2"/>
+  <text class="name" x="848.0" y="542" text-anchor="middle">OUTPUT</text>
+  <text class="cls" x="848.0" y="559" text-anchor="middle">LoanOutput</text>
+  <text class="info" x="848.0" y="591" text-anchor="middle">dto/output</text>
+  <rect class="glow d13" x="632" y="520" width="128" height="80" rx="12" stroke="#818cf8"/>
+  <rect x="632" y="520" width="128" height="80" rx="12" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
+  <text class="name" x="696.0" y="542" text-anchor="middle">RESPONSE</text>
+  <text class="cls" x="696.0" y="559" text-anchor="middle">LoanRestMapper</text>
+  <text class="cls" x="696.0" y="572" text-anchor="middle">LoanResponse</text>
+  <text class="info" x="696.0" y="591" text-anchor="middle">Output → Response</text>
+  <rect x="639.1" y="501" width="113.7" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="696.0" y="512" text-anchor="middle" fill="#a5b4fc">rest/dto/response</text>
+  <rect class="glow d14" x="480" y="664" width="128" height="80" rx="12" stroke="#ef4444"/>
+  <rect x="480" y="664" width="128" height="80" rx="12" fill="#2a1215" stroke="#ef4444" stroke-width="2"/>
+  <text class="name" x="544.0" y="686" text-anchor="middle">ERROR HANDLER</text>
+  <text class="cls" x="544.0" y="703" text-anchor="middle">GlobalException</text>
+  <text class="cls" x="544.0" y="716" text-anchor="middle">Handler</text>
+  <text class="info" x="544.0" y="735" text-anchor="middle">Problem Details</text>
+  <rect x="465.8" y="645" width="156.4" height="15" rx="4" fill="#0f172a" opacity=".92"/>
+  <text class="tag" x="544.0" y="656" text-anchor="middle" fill="#fca5a5">infrastructure/exception</text>
+
+  <line x1="32" y1="790" x2="1208" y2="790" stroke="#1e293b" stroke-width="2"/>
+  <text class="legendb" x="32" y="818" text-anchor="start">Capas:</text>
+  <rect x="84" y="805" width="16" height="16" rx="4" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
+  <text class="legend" x="106" y="818" text-anchor="start">infrastructure · adapter/in</text>
+  <rect x="298.8" y="805" width="16" height="16" rx="4" fill="#2a1f0a" stroke="#f59e0b" stroke-width="2"/>
+  <text class="legend" x="320.8" y="818" text-anchor="start">application</text>
+  <rect x="411.20000000000005" y="805" width="16" height="16" rx="4" fill="#0b2a17" stroke="#22c55e" stroke-width="2"/>
+  <text class="legend" x="433.20000000000005" y="818" text-anchor="start">domain</text>
+  <rect x="491.6" y="805" width="16" height="16" rx="4" fill="#062a27" stroke="#14b8a6" stroke-width="2"/>
+  <text class="legend" x="513.6" y="818" text-anchor="start">infrastructure · adapter/out</text>
+  <rect x="712.8000000000001" y="805" width="16" height="16" rx="4" fill="#111827" stroke="#c0c7d1" stroke-width="2"/>
+  <text class="legend" x="734.8000000000001" y="818" text-anchor="start">persistencia</text>
+  <rect x="831.6000000000001" y="805" width="16" height="16" rx="4" fill="#111827" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 3"/>
+  <text class="legend" x="853.6000000000001" y="818" text-anchor="start">otro microservicio</text>
+  <rect x="988.8000000000002" y="805" width="16" height="16" rx="4" fill="#2a1215" stroke="#ef4444" stroke-width="2"/>
+  <text class="legend" x="1010.8000000000002" y="818" text-anchor="start">manejo de errores</text>
+  <text class="legendb" x="32" y="848" text-anchor="start">Flujos:</text>
+  <line x1="84" y1="844" x2="114" y2="844" stroke="#475569" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
+  <circle cx="99" cy="844" r="4.5" fill="#22d3ee"/>
+  <text class="legend" x="122" y="848" text-anchor="start">petición</text>
+  <line x1="195.2" y1="844" x2="225.2" y2="844" stroke="#15803d" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
+  <circle cx="210.2" cy="844" r="4.5" fill="#22c55e"/>
+  <text class="legend" x="233.2" y="848" text-anchor="start">reglas de dominio</text>
+  <line x1="364.0" y1="844" x2="394.0" y2="844" stroke="#64748b" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
+  <circle cx="379.0" cy="844" r="4.5" fill="#a5b4fc"/>
+  <text class="legend" x="402.0" y="848" text-anchor="start">llamada a otro MS</text>
+  <line x1="532.8" y1="844" x2="562.8" y2="844" stroke="#0f766e" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
+  <circle cx="547.8" cy="844" r="4.5" fill="#5eead4"/>
+  <text class="legend" x="570.8" y="848" text-anchor="start">respuesta</text>
+  <line x1="650.4" y1="844" x2="680.4" y2="844" stroke="#b91c1c" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
+  <circle cx="665.4" cy="844" r="4.5" fill="#f87171"/>
+  <text class="legend" x="688.4" y="848" text-anchor="start">error → Problem Details</text>
+  <text class="rule" x="32" y="878" text-anchor="start">Dependencias: infrastructure → application → domain. Los adaptadores implementan los puertos; el dominio no depende de Spring, R2DBC, Mongo ni WebClient.</text>
+  <text class="rule" x="32" y="898" text-anchor="start">Nunca: Controller → Repository, Entity/Document en la respuesta, DTO remoto dentro del dominio, ni WebClient fuera de adapter/out/http.</text>
+</svg>
