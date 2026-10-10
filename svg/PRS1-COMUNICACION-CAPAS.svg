@@ -1,253 +1,159 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 920" width="1240" height="920" role="img" aria-labelledby="title desc">
-  <title id="title">PRS1 Cañete Seguro: comunicación entre capas (MVC mejorado)</title>
-  <desc id="desc">Animación del recorrido de una petición: cliente, gateway, filtro de seguridad, controller, mapper, service e implementación, modelo, repository con MongoDB y client WebClient hacia otro microservicio; la respuesta regresa como DTO y los errores como Problem Details.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000" role="img" aria-labelledby="title desc">
+<title id="title">PRS1 · Cañete Seguro: arquitectura hexagonal y comunicación</title>
+<desc id="desc">Diagrama homogéneo de arquitectura hexagonal para el contexto alert. Gateway independiente, adaptador REST de entrada, caso de uso, dominio y puertos de salida hacia persistencia y cliente HTTP externo. Incluye mappers de cada frontera, seguridad y manejo centralizado de excepciones.</desc>
+<defs><linearGradient id="background" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0b1220"/><stop offset="1" stop-color="#101b2c"/></linearGradient><marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8ca1bb"/></marker><style>.flow{animation:dash 1.6s linear infinite}@keyframes dash{to{stroke-dashoffset:-30}}@media(prefers-reduced-motion:reduce){.flow{animation:none}}</style></defs>
+<rect width="1600" height="1000" rx="24" fill="url(#background)"/><rect x="1" y="1" width="1598" height="998" rx="24" fill="none" stroke="#27364b" stroke-width="2"/>
 
-  <defs>
-    <style>
-      .bg { fill: #0f172a; }
-      .frame { fill: none; stroke: #1e293b; stroke-width: 2; }
-      .title { font: 700 22px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #f1f5f9; }
-      .subtitle { font: 400 13px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #94a3b8; }
-      .name { font: 700 13px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #f8fafc; letter-spacing: .4px; }
-      .cls { font: 400 10px Consolas, 'Courier New', monospace; fill: #cbd5e1; }
-      .info { font: 400 10.5px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #94a3b8; }
-      .tag { font: 600 10px Consolas, 'Courier New', monospace; }
-      .note { font: 600 10.5px 'Segoe UI', Helvetica, Arial, sans-serif; }
-      .legend { font: 400 12px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #cbd5e1; }
-      .legendb { font: 700 12px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #e2e8f0; }
-      .rule { font: 400 12px 'Segoe UI', Helvetica, Arial, sans-serif; fill: #94a3b8; }
-      .chip { font: 700 11px Consolas, 'Courier New', monospace; fill: #0f172a; }
-
-      .flow { fill: none; stroke-width: 3; stroke-dasharray: 8 7; animation: dash 1.2s linear infinite; }
-      .flow.req { stroke: #475569; }
-      .flow.res { stroke: #0f766e; }
-      .flow.rem { stroke: #64748b; }
-      .flow.dom { stroke: #15803d; }
-      .flow.err { stroke: #b91c1c; stroke-dasharray: 3 7; animation-duration: 2.4s; }
-      @keyframes dash { to { stroke-dashoffset: -30; } }
-
-      .glow { fill: none; stroke-width: 7; opacity: 0; animation: glow 12.6s ease-in-out infinite; }
-      @keyframes glow {
-        0% { opacity: 0; }
-        2.1% { opacity: .95; }
-        7.1% { opacity: .95; }
-        10.0% { opacity: 0; }
-        100% { opacity: 0; }
-      }
-
-      .d0 { animation-delay: 0.0s; }
-      .d1 { animation-delay: 0.9s; }
-      .d2 { animation-delay: 1.8s; }
-      .d3 { animation-delay: 2.7s; }
-      .d4 { animation-delay: 3.6s; }
-      .d5 { animation-delay: 4.5s; }
-      .d6 { animation-delay: 5.4s; }
-      .d7 { animation-delay: 6.3s; }
-      .d8 { animation-delay: 7.2s; }
-      .d9 { animation-delay: 8.1s; }
-      .d10 { animation-delay: 9.0s; }
-      .d11 { animation-delay: 9.9s; }
-      .d12 { animation-delay: 10.8s; }
-      .d13 { animation-delay: 11.7s; }
-    </style>
-    <marker id="ar-req" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
-    <marker id="ar-res" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#14b8a6"/></marker>
-    <marker id="ar-rem" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/></marker>
-    <marker id="ar-dom" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22c55e"/></marker>
-    <marker id="ar-err" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ef4444"/></marker>
-  </defs>
-
-  <rect class="bg" x="0" y="0" width="1240" height="920" rx="18"/>
-  <rect class="frame" x="1" y="1" width="1238" height="918" rx="18"/>
-  <rect x="32" y="26" width="178" height="24" rx="12" fill="#fb923c"/>
-  <text class="chip" x="121.0" y="42.5" text-anchor="middle">PRS1 · CAÑETE SEGURO</text>
-  <text class="title" x="226" y="45" text-anchor="start">Comunicación entre capas · MVC por capas mejorado</text>
-  <text class="subtitle" x="32" y="76" text-anchor="start">Estructura principal: controller → service → repository / client, con el contexto alert como ejemplo (la opción hexagonal queda como alternativa).</text>
-  <text class="subtitle" x="32" y="96" text-anchor="start">Raíz: pe.edu.vallegrande.caneteseguro.&lt;contexto&gt; · MongoDB reactivo (WebFlux, sin block()) · TenantId desde el JWT · Alert ≠ AlertDocument ≠ AlertResponse.</text>
-
-  <!-- Capas -->
-  <rect x="168" y="126" width="600" height="632" rx="14" fill="#818cf8" opacity=".06"/>
-  <text class="tag" x="468.0" y="144" text-anchor="middle" fill="#818cf8">CONTROLLER · DTO · MAPPER</text>
-  <rect x="776" y="126" width="296" height="632" rx="14" fill="#f59e0b" opacity=".06"/>
-  <text class="tag" x="924.0" y="144" text-anchor="middle" fill="#f59e0b">SERVICE · MODEL · REPOSITORY</text>
-  <rect x="1080" y="126" width="144" height="632" rx="14" fill="#14b8a6" opacity=".06"/>
-  <text class="tag" x="1152.0" y="144" text-anchor="middle" fill="#14b8a6">CLIENT</text>
-
-  <!-- Conectores -->
-  <path id="main" class="flow req" d="M152,240 H1086" marker-end="url(#ar-req)"/>
-  <path id="model" class="flow dom" d="M946,280 L900,358" marker-end="url(#ar-dom)"/>
-  <path id="rem_dn" class="flow rem" d="M1138,280 V358" marker-end="url(#ar-rem)"/>
-  <path id="rem_up" class="flow res" d="M1166,360 V282" marker-end="url(#ar-res)"/>
-  <path id="repo" class="flow req" d="M1000,280 V358" marker-end="url(#ar-req)"/>
-  <path id="db" class="flow req" d="M1000,440 V518" marker-end="url(#ar-req)"/>
-  <path id="out" class="flow res" d="M848,440 V518" marker-end="url(#ar-res)"/>
-  <path id="ret" class="flow res" d="M784,560 H100 V282" marker-end="url(#ar-res)"/>
-  <path id="err_dom" class="flow err" d="M936,266 H926 V704 H610" marker-end="url(#ar-err)"/>
-  <path id="err_rem" class="flow err" d="M1152,440 V720 H610" marker-end="url(#ar-err)"/>
-  <path id="err_cli" class="flow err" d="M480,708 H76 V282" marker-end="url(#ar-err)"/>
-  <text class="note" x="934" y="320" text-anchor="end" fill="#86efac">aplica reglas</text>
-  <text class="note" x="1132" y="326" text-anchor="end" fill="#a5b4fc">RemoteRequest</text>
-  <text class="note" x="1172" y="326" text-anchor="start" fill="#5eead4">Response</text>
-  <text class="note" x="1008" y="490" text-anchor="start" fill="#e2e8f0">query reactiva</text>
-  <text class="note" x="840" y="490" text-anchor="end" fill="#5eead4">modelo</text>
-  <text class="note" x="392" y="552" text-anchor="middle" fill="#5eead4">Response DTO · 200 / 201</text>
-  <text class="note" x="920" y="664" text-anchor="end" fill="#f87171">BusinessException</text>
-  <text class="note" x="1144" y="712" text-anchor="end" fill="#f87171">DependencyUnavailable</text>
-  <text class="note" x="300" y="701" text-anchor="middle" fill="#f87171">Problem Details 4xx / 5xx</text>
-
-  <!-- Paquetes -->
-  <circle r="5" fill="#fb923c"><animateMotion dur="7.0s" repeatCount="indefinite" begin="-0.00s"><mpath href="#main"/></animateMotion></circle>
-  <circle r="5" fill="#fb923c"><animateMotion dur="7.0s" repeatCount="indefinite" begin="-1.75s"><mpath href="#main"/></animateMotion></circle>
-  <circle r="5" fill="#fb923c"><animateMotion dur="7.0s" repeatCount="indefinite" begin="-3.50s"><mpath href="#main"/></animateMotion></circle>
-  <circle r="5" fill="#fb923c"><animateMotion dur="7.0s" repeatCount="indefinite" begin="-5.25s"><mpath href="#main"/></animateMotion></circle>
-  <circle r="4" fill="#4ade80"><animateMotion dur="1.2s" repeatCount="indefinite" begin="-0.00s"><mpath href="#model"/></animateMotion></circle>
-  <circle r="4" fill="#a5b4fc"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#rem_dn"/></animateMotion></circle>
-  <circle r="4" fill="#5eead4"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#rem_up"/></animateMotion></circle>
-  <circle r="4" fill="#fb923c"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#repo"/></animateMotion></circle>
-  <circle r="4" fill="#fb923c"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#db"/></animateMotion></circle>
-  <circle r="4" fill="#5eead4"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.00s"><mpath href="#out"/></animateMotion></circle>
-  <circle r="4" fill="#5eead4"><animateMotion dur="5.0s" repeatCount="indefinite" begin="-0.00s"><mpath href="#ret"/></animateMotion></circle>
-  <circle r="4" fill="#5eead4"><animateMotion dur="5.0s" repeatCount="indefinite" begin="-2.50s"><mpath href="#ret"/></animateMotion></circle>
-  <circle r="4" fill="#f87171"><animateMotion dur="4.0s" repeatCount="indefinite" begin="-0.00s"><mpath href="#err_dom"/></animateMotion></circle>
-  <circle r="4" fill="#f87171"><animateMotion dur="4.6s" repeatCount="indefinite" begin="-0.00s"><mpath href="#err_rem"/></animateMotion></circle>
-  <circle r="4" fill="#f87171"><animateMotion dur="4.2s" repeatCount="indefinite" begin="-0.00s"><mpath href="#err_cli"/></animateMotion></circle>
-
-  <!-- Cajas -->
-  <rect class="glow d0" x="24" y="200" width="128" height="80" rx="12" stroke="#64748b"/>
-  <rect x="24" y="200" width="128" height="80" rx="12" fill="#1e293b" stroke="#64748b" stroke-width="2" stroke-dasharray="5 4"/>
-  <text class="name" x="88.0" y="222" text-anchor="middle">CLIENTE</text>
-  <text class="cls" x="88.0" y="239" text-anchor="middle">app ciudadana / web</text>
-  <text class="info" x="88.0" y="271" text-anchor="middle">Bearer JWT</text>
-  <rect class="glow d1" x="176" y="200" width="128" height="80" rx="12" stroke="#38bdf8"/>
-  <rect x="176" y="200" width="128" height="80" rx="12" fill="#0c2233" stroke="#38bdf8" stroke-width="2"/>
-  <text class="name" x="240.0" y="222" text-anchor="middle">API GATEWAY</text>
-  <text class="cls" x="240.0" y="239" text-anchor="middle">caneteseguro.gateway</text>
-  <text class="info" x="240.0" y="271" text-anchor="middle">JWT · CORS · rutas</text>
-  <rect x="167.9" y="181" width="144.2" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="240.0" y="192" text-anchor="middle" fill="#7dd3fc">gateway/infrastructure</text>
-  <rect class="glow d2" x="328" y="200" width="128" height="80" rx="12" stroke="#818cf8"/>
-  <rect x="328" y="200" width="128" height="80" rx="12" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
-  <text class="name" x="392.0" y="222" text-anchor="middle">SECURITY</text>
-  <text class="cls" x="392.0" y="239" text-anchor="middle">TenantContext</text>
-  <text class="cls" x="392.0" y="252" text-anchor="middle">WebFilter</text>
-  <text class="info" x="392.0" y="271" text-anchor="middle">JWT → TenantContext</text>
-  <rect x="359.6" y="181" width="64.9" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="392.0" y="192" text-anchor="middle" fill="#a5b4fc">security/</text>
-  <rect class="glow d3" x="480" y="200" width="128" height="80" rx="12" stroke="#818cf8"/>
-  <rect x="480" y="200" width="128" height="80" rx="12" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
-  <text class="name" x="544.0" y="222" text-anchor="middle">CONTROLLER</text>
-  <text class="cls" x="544.0" y="239" text-anchor="middle">AlertController</text>
-  <text class="cls" x="544.0" y="252" text-anchor="middle">CreateAlertRequest</text>
-  <text class="info" x="544.0" y="271" text-anchor="middle">@Valid</text>
-  <rect x="484.1" y="181" width="119.8" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="544.0" y="192" text-anchor="middle" fill="#a5b4fc">controller/ · dto/</text>
-  <rect class="glow d4" x="632" y="200" width="128" height="80" rx="12" stroke="#818cf8"/>
-  <rect x="632" y="200" width="128" height="80" rx="12" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
-  <text class="name" x="696.0" y="222" text-anchor="middle">MAPPER</text>
-  <text class="cls" x="696.0" y="239" text-anchor="middle">AlertRestMapper</text>
-  <text class="info" x="696.0" y="271" text-anchor="middle">Request → Alert</text>
-  <rect x="669.6" y="181" width="52.7" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="696.0" y="192" text-anchor="middle" fill="#a5b4fc">mapper/</text>
-  <rect class="glow d5" x="784" y="200" width="128" height="80" rx="12" stroke="#f59e0b"/>
-  <rect x="784" y="200" width="128" height="80" rx="12" fill="#2a1f0a" stroke="#f59e0b" stroke-width="2"/>
-  <text class="name" x="848.0" y="222" text-anchor="middle">SERVICE</text>
-  <text class="cls" x="848.0" y="239" text-anchor="middle">AlertService</text>
-  <text class="info" x="848.0" y="271" text-anchor="middle">interface</text>
-  <rect x="818.6" y="181" width="58.8" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="848.0" y="192" text-anchor="middle" fill="#fbbf24">service/</text>
-  <rect class="glow d6" x="936" y="200" width="128" height="80" rx="12" stroke="#f59e0b"/>
-  <rect x="936" y="200" width="128" height="80" rx="12" fill="#2a1f0a" stroke="#f59e0b" stroke-width="2"/>
-  <text class="name" x="1000.0" y="222" text-anchor="middle">SERVICE IMPL</text>
-  <text class="cls" x="1000.0" y="239" text-anchor="middle">AlertServiceImpl</text>
-  <text class="info" x="1000.0" y="271" text-anchor="middle">lógica · orquesta</text>
-  <rect x="955.4" y="181" width="89.3" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="1000.0" y="192" text-anchor="middle" fill="#fbbf24">service/impl/</text>
-  <rect class="glow d7" x="784" y="360" width="128" height="80" rx="12" stroke="#22c55e"/>
-  <rect x="784" y="360" width="128" height="80" rx="12" fill="#0b2a17" stroke="#22c55e" stroke-width="2"/>
-  <text class="name" x="848.0" y="382" text-anchor="middle">MODEL</text>
-  <text class="cls" x="848.0" y="399" text-anchor="middle">Alert · AlertId</text>
-  <text class="cls" x="848.0" y="412" text-anchor="middle">AlertStatus</text>
-  <text class="info" x="848.0" y="431" text-anchor="middle">reglas del modelo</text>
-  <rect x="824.7" y="341" width="46.6" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="848.0" y="352" text-anchor="middle" fill="#86efac">model/</text>
-  <rect class="glow d8" x="936" y="360" width="128" height="80" rx="12" stroke="#14b8a6"/>
-  <rect x="936" y="360" width="128" height="80" rx="12" fill="#062a27" stroke="#14b8a6" stroke-width="2"/>
-  <text class="name" x="1000.0" y="382" text-anchor="middle">REPOSITORY</text>
-  <text class="cls" x="1000.0" y="399" text-anchor="middle">AlertRepository</text>
-  <text class="cls" x="1000.0" y="412" text-anchor="middle">AlertRepositoryImpl</text>
-  <text class="info" x="1000.0" y="431" text-anchor="middle">interface → impl</text>
-  <rect x="961.5" y="341" width="77.1" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="1000.0" y="352" text-anchor="middle" fill="#5eead4">repository/</text>
-  <rect class="glow d9" x="936" y="520" width="128" height="80" rx="12" stroke="#c0c7d1"/>
-  <rect x="936" y="520" width="128" height="80" rx="12" fill="#111827" stroke="#c0c7d1" stroke-width="2"/>
-  <text class="name" x="1000.0" y="542" text-anchor="middle">MONGODB</text>
-  <text class="cls" x="1000.0" y="559" text-anchor="middle">AlertDocument</text>
-  <text class="cls" x="1000.0" y="572" text-anchor="middle">db_alert</text>
-  <text class="info" x="1000.0" y="591" text-anchor="middle">SpringData reactivo</text>
-  <rect x="943.1" y="501" width="113.7" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="1000.0" y="512" text-anchor="middle" fill="#e2e8f0">repository/mongo/</text>
-  <rect class="glow d10" x="1088" y="200" width="128" height="80" rx="12" stroke="#14b8a6"/>
-  <rect x="1088" y="200" width="128" height="80" rx="12" fill="#062a27" stroke="#14b8a6" stroke-width="2"/>
-  <text class="name" x="1152.0" y="222" text-anchor="middle">CLIENT</text>
-  <text class="cls" x="1152.0" y="239" text-anchor="middle">IncidentClient</text>
-  <text class="cls" x="1152.0" y="252" text-anchor="middle">IncidentWebClient</text>
-  <text class="info" x="1152.0" y="271" text-anchor="middle">timeout · CB</text>
-  <rect x="1098.2" y="181" width="107.6" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="1152.0" y="192" text-anchor="middle" fill="#5eead4">client/incident/</text>
-  <rect class="glow d11" x="1088" y="360" width="128" height="80" rx="12" stroke="#94a3b8"/>
-  <rect x="1088" y="360" width="128" height="80" rx="12" fill="#111827" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5 4"/>
-  <text class="name" x="1152.0" y="382" text-anchor="middle">OTRO MS</text>
-  <text class="cls" x="1152.0" y="399" text-anchor="middle">incident-command</text>
-  <text class="info" x="1152.0" y="431" text-anchor="middle">POST /incidents</text>
-  <rect class="glow d12" x="784" y="520" width="128" height="80" rx="12" stroke="#818cf8"/>
-  <rect x="784" y="520" width="128" height="80" rx="12" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
-  <text class="name" x="848.0" y="542" text-anchor="middle">RESPONSE</text>
-  <text class="cls" x="848.0" y="559" text-anchor="middle">AlertRestMapper</text>
-  <text class="cls" x="848.0" y="572" text-anchor="middle">AlertResponse</text>
-  <text class="info" x="848.0" y="591" text-anchor="middle">Alert → Response</text>
-  <rect x="803.4" y="501" width="89.3" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="848.0" y="512" text-anchor="middle" fill="#a5b4fc">dto/response/</text>
-  <rect class="glow d13" x="480" y="664" width="128" height="80" rx="12" stroke="#ef4444"/>
-  <rect x="480" y="664" width="128" height="80" rx="12" fill="#2a1215" stroke="#ef4444" stroke-width="2"/>
-  <text class="name" x="544.0" y="686" text-anchor="middle">ERROR HANDLER</text>
-  <text class="cls" x="544.0" y="703" text-anchor="middle">GlobalException</text>
-  <text class="cls" x="544.0" y="716" text-anchor="middle">Handler</text>
-  <text class="info" x="544.0" y="735" text-anchor="middle">Problem Details</text>
-  <rect x="508.5" y="645" width="71.0" height="15" rx="4" fill="#0f172a" opacity=".92"/>
-  <text class="tag" x="544.0" y="656" text-anchor="middle" fill="#fca5a5">exception/</text>
-
-  <line x1="32" y1="790" x2="1208" y2="790" stroke="#1e293b" stroke-width="2"/>
-  <text class="legendb" x="32" y="818" text-anchor="start">Capas:</text>
-  <rect x="84" y="805" width="16" height="16" rx="4" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
-  <text class="legend" x="106" y="818" text-anchor="start">controller · dto · mapper</text>
-  <rect x="286.0" y="805" width="16" height="16" rx="4" fill="#2a1f0a" stroke="#f59e0b" stroke-width="2"/>
-  <text class="legend" x="308.0" y="818" text-anchor="start">service</text>
-  <rect x="372.8" y="805" width="16" height="16" rx="4" fill="#0b2a17" stroke="#22c55e" stroke-width="2"/>
-  <text class="legend" x="394.8" y="818" text-anchor="start">model</text>
-  <rect x="446.8" y="805" width="16" height="16" rx="4" fill="#062a27" stroke="#14b8a6" stroke-width="2"/>
-  <text class="legend" x="468.8" y="818" text-anchor="start">repository · client</text>
-  <rect x="610.4000000000001" y="805" width="16" height="16" rx="4" fill="#111827" stroke="#c0c7d1" stroke-width="2"/>
-  <text class="legend" x="632.4000000000001" y="818" text-anchor="start">persistencia</text>
-  <rect x="729.2" y="805" width="16" height="16" rx="4" fill="#111827" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 3"/>
-  <text class="legend" x="751.2" y="818" text-anchor="start">otro microservicio</text>
-  <rect x="886.4000000000001" y="805" width="16" height="16" rx="4" fill="#2a1215" stroke="#ef4444" stroke-width="2"/>
-  <text class="legend" x="908.4000000000001" y="818" text-anchor="start">exception</text>
-  <text class="legendb" x="32" y="848" text-anchor="start">Flujos:</text>
-  <line x1="84" y1="844" x2="114" y2="844" stroke="#475569" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
-  <circle cx="99" cy="844" r="4.5" fill="#fb923c"/>
-  <text class="legend" x="122" y="848" text-anchor="start">petición</text>
-  <line x1="195.2" y1="844" x2="225.2" y2="844" stroke="#15803d" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
-  <circle cx="210.2" cy="844" r="4.5" fill="#22c55e"/>
-  <text class="legend" x="233.2" y="848" text-anchor="start">reglas de dominio</text>
-  <line x1="364.0" y1="844" x2="394.0" y2="844" stroke="#64748b" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
-  <circle cx="379.0" cy="844" r="4.5" fill="#a5b4fc"/>
-  <text class="legend" x="402.0" y="848" text-anchor="start">llamada a otro MS</text>
-  <line x1="532.8" y1="844" x2="562.8" y2="844" stroke="#0f766e" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
-  <circle cx="547.8" cy="844" r="4.5" fill="#5eead4"/>
-  <text class="legend" x="570.8" y="848" text-anchor="start">respuesta</text>
-  <line x1="650.4" y1="844" x2="680.4" y2="844" stroke="#b91c1c" stroke-width="3" stroke-dasharray="8 7" class="flow"/>
-  <circle cx="665.4" cy="844" r="4.5" fill="#f87171"/>
-  <text class="legend" x="688.4" y="848" text-anchor="start">error → Problem Details</text>
-  <text class="rule" x="32" y="878" text-anchor="start">Dependencias: controller → service → repository / client. El modelo no conoce Spring ni MongoDB; cada cruce de capa usa su mapper.</text>
-  <text class="rule" x="32" y="898" text-anchor="start">Nunca: inyectar el repository en el controller, devolver AlertDocument, reutilizar el DTO remoto como modelo, ni usar WebClient fuera de client/.</text>
+<rect x="38" y="30" width="194" height="34" rx="17" fill="#fb923c" stroke="#fb923c" stroke-width="1"/>
+<text x="135" y="53" text-anchor="middle" fill="#0b1220" font-family="Consolas, Courier New, monospace" font-size="13" font-weight="750">PRS1 · CAÑETE SEGURO</text>
+<text x="255" y="55" text-anchor="start" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">Arquitectura hexagonal · flujo de una petición</text>
+<text x="40" y="91" text-anchor="start" fill="#a9b8cb" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="400">Un caso de uso del contexto alert · gateway separado · adaptadores en los bordes · dependencias hacia el dominio</text>
+<text x="40" y="119" text-anchor="start" fill="#89a0ba" font-family="Consolas, Courier New, monospace" font-size="13" font-weight="500">Raíz Java: pe.edu.vallegrande.caneteseguro.alert</text>
+<rect x="35" y="160" width="190" height="250" rx="18" fill="#101c2b" stroke="#54657a" stroke-width="1.5" stroke-dasharray="7 6"/>
+<text x="130" y="188" text-anchor="middle" fill="#9eafc4" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="700">CLIENTE</text>
+<rect x="55" y="220" width="150" height="130" rx="14" fill="#172233" stroke="#64748b" stroke-width="2"/>
+<text x="130.0" y="247" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">CLIENTE</text>
+<text x="130.0" y="271" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="400">
+<tspan x="130.0" dy="0">Web / móvil</tspan>
+<tspan x="130.0" dy="19">HTTP request</tspan>
+<tspan x="130.0" dy="19">Bearer token</tspan>
+</text>
+<rect x="250" y="160" width="205" height="250" rx="18" fill="#0c1b2c" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="7 6"/>
+<text x="352" y="188" text-anchor="middle" fill="#7dd3fc" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="700">COMPONENTE INDEPENDIENTE</text>
+<rect x="270" y="220" width="165" height="130" rx="14" fill="#0c2233" stroke="#38bdf8" stroke-width="2"/>
+<text x="352.5" y="247" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">API GATEWAY</text>
+<text x="352.5" y="271" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
+<tspan x="352.5" dy="0">Rutas a microservicios</tspan>
+<tspan x="352.5" dy="19">CORS · rate limit</tspan>
+<tspan x="352.5" dy="19">Validación token*</tspan>
+</text>
+<text x="352.5" y="337" text-anchor="middle" fill="#38bdf8" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">vg-gateway-{producto}</text>
+<text x="352" y="378" text-anchor="middle" fill="#8ea4bd" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="400">* Si aplica; no sustituye autorización</text>
+<rect x="480" y="150" width="830" height="660" rx="20" fill="#0d1726" stroke="#3c4d63" stroke-width="2"/>
+<text x="505" y="181" text-anchor="start" fill="#d6e0ed" font-family="Consolas, Courier New, monospace" font-size="13" font-weight="700">MICROSERVICIO · ALERT</text>
+<text x="1285" y="181" text-anchor="end" fill="#8ea4bd" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400">Unidad desplegable</text>
+<rect x="500" y="205" width="240" height="285" rx="16" fill="#111b30" stroke="#818cf8" stroke-width="1"/>
+<text x="620" y="232" text-anchor="middle" fill="#a5b4fc" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="700">INFRASTRUCTURE · IN</text>
+<rect x="755" y="205" width="240" height="285" rx="16" fill="#1e1a10" stroke="#f59e0b" stroke-width="1"/>
+<text x="875" y="232" text-anchor="middle" fill="#fbbf24" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="700">APPLICATION</text>
+<rect x="1010" y="205" width="280" height="285" rx="16" fill="#0d2119" stroke="#22c55e" stroke-width="1"/>
+<text x="1150" y="232" text-anchor="middle" fill="#86efac" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="700">DOMAIN</text>
+<path d="M205 285 H270" fill="none" stroke="#73859e" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<path d="M435 285 H520" fill="none" stroke="#73859e" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<path d="M720 330 H780" fill="none" stroke="#73859e" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<path d="M970 330 H1030" fill="none" stroke="#73859e" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<rect x="520" y="260" width="200" height="170" rx="14" fill="#171b36" stroke="#818cf8" stroke-width="2"/>
+<text x="620.0" y="287" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">REST ADAPTER</text>
+<text x="620.0" y="311" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
+<tspan x="620.0" dy="0">Controller</tspan>
+<tspan x="620.0" dy="19">HTTP request / response DTO</tspan>
+<tspan x="620.0" dy="19">REST mapper</tspan>
+<tspan x="620.0" dy="19">→ input port</tspan>
+</text>
+<text x="620.0" y="417" text-anchor="middle" fill="#818cf8" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">adapter/in/rest</text>
+<rect x="780" y="270" width="190" height="135" rx="14" fill="#29200f" stroke="#f59e0b" stroke-width="2"/>
+<text x="875.0" y="297" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">CASO DE USO</text>
+<text x="875.0" y="321" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
+<tspan x="875.0" dy="0">CreateAlert</tspan>
+<tspan x="875.0" dy="19">implementa port/in</tspan>
+<tspan x="875.0" dy="19">orquesta dominio y puertos</tspan>
+</text>
+<text x="875.0" y="392" text-anchor="middle" fill="#f59e0b" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">application/usecase</text>
+<rect x="790" y="425" width="170" height="42" rx="14" fill="#29200f" stroke="#fbbf24" stroke-width="2"/>
+<text x="875.0" y="452" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700">DTO APLICACIÓN</text>
+<text x="875.0" y="476" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="400">
+<tspan x="875.0" dy="0">command / result</tspan>
+</text>
+<text x="875.0" y="454" text-anchor="middle" fill="#fbbf24" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">application/dto</text>
+<rect x="1030" y="260" width="240" height="135" rx="14" fill="#0c2819" stroke="#22c55e" stroke-width="2"/>
+<text x="1150.0" y="287" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">MODELO DE DOMINIO</text>
+<text x="1150.0" y="311" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="400">
+<tspan x="1150.0" dy="0">Alert</tspan>
+<tspan x="1150.0" dy="19">value objects</tspan>
+<tspan x="1150.0" dy="19">reglas e invariantes</tspan>
+</text>
+<text x="1150.0" y="382" text-anchor="middle" fill="#22c55e" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">domain/model · vo</text>
+<rect x="1030" y="415" width="112" height="54" rx="14" fill="#0c2819" stroke="#86efac" stroke-width="2"/>
+<text x="1086.0" y="442" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">PORT IN</text>
+<text x="1086.0" y="456" text-anchor="middle" fill="#86efac" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">domain/port/in</text>
+<rect x="1153" y="415" width="117" height="54" rx="14" fill="#0c2819" stroke="#86efac" stroke-width="2"/>
+<text x="1211.5" y="442" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">PORT OUT</text>
+<text x="1211.5" y="456" text-anchor="middle" fill="#86efac" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">domain/port/out</text>
+<text x="747" y="310" text-anchor="middle" fill="#b9b1ff" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="500">REST DTO ↔ aplicación</text>
+<text x="1000" y="310" text-anchor="middle" fill="#86efac" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="500">invoca reglas</text>
+<rect x="520" y="442" width="112" height="38" rx="14" fill="#101e32" stroke="#60a5fa" stroke-width="2"/>
+<text x="576.0" y="469" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700">SECURITY</text>
+<text x="576.0" y="493" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="9" font-weight="400">
+<tspan x="576.0" dy="0">si aplica</tspan>
+</text>
+<rect x="646" y="442" width="94" height="38" rx="14" fill="#2a1519" stroke="#f87171" stroke-width="2"/>
+<text x="693.0" y="469" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700">EXCEPTION</text>
+<text x="693.0" y="493" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="8" font-weight="400">
+<tspan x="693.0" dy="0">handler global</tspan>
+</text>
+<rect x="500" y="520" width="790" height="265" rx="16" fill="#101b2a" stroke="#5eead4" stroke-width="1"/>
+<text x="520" y="545" text-anchor="start" fill="#5eead4" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="700">INFRASTRUCTURE · OUT / ADAPTADORES DEL MICROSERVICIO</text>
+<path d="M1180 469 V550 H670 V585" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<path d="M1245 469 V570 H1050 V585" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<rect x="535" y="585" width="270" height="155" rx="14" fill="#092722" stroke="#14b8a6" stroke-width="2"/>
+<text x="670.0" y="612" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">ADAPTADOR PERSISTENCIA</text>
+<text x="670.0" y="636" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
+<tspan x="670.0" dy="0">Spring Data repository</tspan>
+<tspan x="670.0" dy="19">Dominio ↔ modelo BD mapper</tspan>
+<tspan x="670.0" dy="19">AlertDocument</tspan>
+<tspan x="670.0" dy="19">Mongo Document</tspan>
+</text>
+<text x="670.0" y="727" text-anchor="middle" fill="#14b8a6" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">adapter/out/persistence</text>
+<rect x="900" y="585" width="300" height="155" rx="14" fill="#092722" stroke="#14b8a6" stroke-width="2"/>
+<text x="1050.0" y="612" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">ADAPTADOR HTTP EXTERNO</text>
+<text x="1050.0" y="636" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
+<tspan x="1050.0" dy="0">IncidentClient</tspan>
+<tspan x="1050.0" dy="19">Dominio ↔ DTO remoto mapper</tspan>
+<tspan x="1050.0" dy="19">HTTP client · timeout · errores</tspan>
+</text>
+<text x="1050.0" y="727" text-anchor="middle" fill="#14b8a6" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">adapter/out/client</text>
+<rect x="1340" y="555" width="220" height="125" rx="14" fill="#151e2b" stroke="#94a3b8" stroke-width="2"/>
+<text x="1450.0" y="582" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">BASE DE DATOS</text>
+<text x="1450.0" y="606" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
+<tspan x="1450.0" dy="0">MongoDB</tspan>
+<tspan x="1450.0" dy="19">modelo técnico separado</tspan>
+<tspan x="1450.0" dy="19">del modelo de dominio</tspan>
+</text>
+<text x="1450.0" y="667" text-anchor="middle" fill="#94a3b8" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">sistema externo al código</text>
+<rect x="1340" y="720" width="220" height="125" rx="14" fill="#151e2b" stroke="#94a3b8" stroke-width="2"/>
+<text x="1450.0" y="747" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">OTRO MICROSERVICIO</text>
+<text x="1450.0" y="771" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
+<tspan x="1450.0" dy="0">incident-command</tspan>
+<tspan x="1450.0" dy="19">contrato HTTP propio</tspan>
+<tspan x="1450.0" dy="19">request / response DTO</tspan>
+</text>
+<text x="1450.0" y="832" text-anchor="middle" fill="#94a3b8" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">dependencia remota</text>
+<path d="M670 585 V560 H1320 V610 H1340" fill="none" stroke="#14b8a6" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<path d="M1200 660 H1260 V782 H1340" fill="none" stroke="#64748b" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<text x="1070" y="646" text-anchor="middle" fill="#86efac" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="500">puerto de salida</text>
+<text x="1300" y="646" text-anchor="middle" fill="#5eead4" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="500">persistencia</text>
+<text x="1300" y="766" text-anchor="middle" fill="#a5b4fc" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="500">HTTP</text>
+<path d="M620 430 V442" fill="none" stroke="#818cf8" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" class="flow"/>
+<path d="M693 442 V430" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" class="flow"/>
+<rect x="35" y="465" width="420" height="205" rx="16" fill="#111b2b" stroke="#33445a" stroke-width="1"/>
+<text x="58" y="496" text-anchor="start" fill="#dbe5f1" font-family="Consolas, Courier New, monospace" font-size="13" font-weight="700">RESPUESTA Y ERRORES</text>
+<text x="58" y="528" text-anchor="start" fill="#a9b8cb" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400">
+<tspan x="58" dy="0">Respuesta: caso de uso → mapper REST → gateway → cliente.</tspan>
+<tspan x="58" dy="25">Excepciones propias: infrastructure/exception/custom/.</tspan>
+<tspan x="58" dy="25">GlobalExceptionHandler produce una respuesta HTTP segura.</tspan>
+<tspan x="58" dy="25">Handlers especiales solo si hacen falta.</tspan>
+<tspan x="58" dy="25">Nunca expongas stack traces ni detalles internos.</tspan>
+</text>
+<rect x="35" y="700" width="420" height="110" rx="16" fill="#101c2b" stroke="#54657a" stroke-width="1"/>
+<text x="58" y="732" text-anchor="start" fill="#dbe5f1" font-family="Consolas, Courier New, monospace" font-size="13" font-weight="700">LÍMITES</text>
+<text x="58" y="758" text-anchor="start" fill="#a9b8cb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400">
+<tspan x="58" dy="0">Sin TenantContext por defecto. PRS4: aislamiento organizacional solo</tspan>
+<tspan x="58" dy="23">si aplica y validado por el servicio dueño de los datos.</tspan>
+</text>
+<rect x="35" y="845" width="1525" height="105" rx="14" fill="#101827" stroke="#26364b" stroke-width="1"/>
+<text x="58" y="875" text-anchor="start" fill="#fb923c" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="700">MAPEO POR FRONTERA</text>
+<text x="58" y="905" text-anchor="start" fill="#c5d2e2" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400">HTTP request/response ↔ aplicación: REST mapper</text>
+<text x="490" y="905" text-anchor="start" fill="#c5d2e2" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400">Dominio ↔ Mongo Document: persistence mapper</text>
+<text x="1050" y="905" text-anchor="start" fill="#c5d2e2" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400">Dominio ↔ contrato remoto: client mapper</text>
+<text x="58" y="932" text-anchor="start" fill="#90a2b8" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400">Regla de dependencias: adaptadores → puertos / casos de uso → dominio. El dominio no depende de Spring, HTTP ni tecnología de persistencia.</text>
 </svg>
