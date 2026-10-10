@@ -2,6 +2,8 @@
 
 ![PRS1: comunicación entre capas con arquitectura hexagonal](./svg/PRS1-COMUNICACION-CAPAS.svg)
 
+[Abrir el SVG a tamaño completo para ampliar](./svg/PRS1-COMUNICACION-CAPAS.svg)
+
 ## Propósito
 
 Estándar hexagonal para los microservicios de Cañete Seguro. El dominio y los casos de uso forman el núcleo; REST, persistencia, clientes HTTP y almacenamiento son adaptadores. Usa la raíz `pe.edu.vallegrande.caneteseguro.{contexto}` y agrega solo componentes usados por el servicio.

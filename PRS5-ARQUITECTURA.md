@@ -2,6 +2,8 @@
 
 ![PRS5: comunicación entre capas con arquitectura hexagonal](./svg/PRS5-COMUNICACION-CAPAS.svg)
 
+[Abrir el SVG a tamaño completo para ampliar](./svg/PRS5-COMUNICACION-CAPAS.svg)
+
 ## Propósito
 
 Estándar hexagonal para los microservicios de EduNova. El dominio y los casos de uso forman el núcleo; REST, persistencia, clientes HTTP y almacenamiento son adaptadores. Usa la raíz `pe.edu.vallegrande.edunova.{contexto}` y agrega solo componentes usados por el servicio.

@@ -2,6 +2,8 @@
 
 ![PRS2: comunicación entre capas con arquitectura hexagonal](./svg/PRS2-COMUNICACION-CAPAS.svg)
 
+[Abrir el SVG a tamaño completo para ampliar](./svg/PRS2-COMUNICACION-CAPAS.svg)
+
 ## Propósito
 
 Estándar hexagonal para los microservicios de Vía Academy. El dominio y los casos de uso forman el núcleo; REST, persistencia, clientes HTTP y almacenamiento son adaptadores. Usa la raíz `pe.edu.vallegrande.viaacademy.{contexto}` y agrega solo componentes usados por el servicio.

@@ -59,12 +59,9 @@
 <tspan x="875.0" dy="19">orquesta dominio y puertos</tspan>
 </text>
 <text x="875.0" y="392" text-anchor="middle" fill="#f59e0b" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">application/usecase</text>
-<rect x="790" y="425" width="170" height="42" rx="14" fill="#29200f" stroke="#fbbf24" stroke-width="2"/>
-<text x="875.0" y="452" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700">DTO APLICACIÓN</text>
-<text x="875.0" y="476" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="400">
-<tspan x="875.0" dy="0">command / result</tspan>
-</text>
-<text x="875.0" y="454" text-anchor="middle" fill="#fbbf24" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">application/dto</text>
+<rect x="790" y="425" width="170" height="48" rx="14" fill="#29200f" stroke="#fbbf24" stroke-width="2"/>
+<text x="875.0" y="445" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">DTO APLICACIÓN</text>
+<text x="875.0" y="462" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="400">command / result</text>
 <rect x="1030" y="260" width="240" height="135" rx="14" fill="#0c2819" stroke="#22c55e" stroke-width="2"/>
 <text x="1150.0" y="287" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">MODELO DE DOMINIO</text>
 <text x="1150.0" y="311" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="400">
@@ -74,44 +71,44 @@
 </text>
 <text x="1150.0" y="382" text-anchor="middle" fill="#22c55e" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">domain/model · vo</text>
 <rect x="1030" y="415" width="112" height="54" rx="14" fill="#0c2819" stroke="#86efac" stroke-width="2"/>
-<text x="1086.0" y="442" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">PORT IN</text>
-<text x="1086.0" y="456" text-anchor="middle" fill="#86efac" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">domain/port/in</text>
+<text x="1086.0" y="440" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">PORT IN</text>
+<text x="1086.0" y="459" text-anchor="middle" fill="#86efac" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">domain/port/in</text>
 <rect x="1153" y="415" width="117" height="54" rx="14" fill="#0c2819" stroke="#86efac" stroke-width="2"/>
-<text x="1211.5" y="442" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">PORT OUT</text>
-<text x="1211.5" y="456" text-anchor="middle" fill="#86efac" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">domain/port/out</text>
+<text x="1211.5" y="440" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700">PORT OUT</text>
+<text x="1211.5" y="459" text-anchor="middle" fill="#86efac" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">domain/port/out</text>
 <text x="747" y="310" text-anchor="middle" fill="#b9b1ff" font-family="Segoe UI, Arial, sans-serif" font-size="9" font-weight="500">REST DTO ↔ aplicación</text>
 <text x="1000" y="310" text-anchor="middle" fill="#86efac" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="500">invoca reglas</text>
-<rect x="520" y="442" width="112" height="38" rx="14" fill="#101e32" stroke="#60a5fa" stroke-width="2"/>
-<text x="576.0" y="469" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700">SECURITY</text>
-<text x="576.0" y="493" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="9" font-weight="400">
+<rect x="520" y="435" width="112" height="55" rx="14" fill="#101e32" stroke="#60a5fa" stroke-width="2"/>
+<text x="576.0" y="462" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700">SECURITY</text>
+<text x="576.0" y="481" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="9" font-weight="400">
 <tspan x="576.0" dy="0">si aplica</tspan>
 </text>
-<rect x="646" y="442" width="94" height="38" rx="14" fill="#2a1519" stroke="#f87171" stroke-width="2"/>
-<text x="693.0" y="469" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700">EXCEPTION</text>
-<text x="693.0" y="493" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="8" font-weight="400">
+<rect x="646" y="435" width="94" height="55" rx="14" fill="#2a1519" stroke="#f87171" stroke-width="2"/>
+<text x="693.0" y="462" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="700">EXCEPTION</text>
+<text x="693.0" y="481" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="8" font-weight="400">
 <tspan x="693.0" dy="0">handler global</tspan>
 </text>
 <rect x="500" y="520" width="790" height="265" rx="16" fill="#101b2a" stroke="#5eead4" stroke-width="1"/>
 <text x="520" y="545" text-anchor="start" fill="#5eead4" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="700">INFRASTRUCTURE · OUT / ADAPTADORES DEL MICROSERVICIO</text>
-<path d="M1180 469 V550 H670 V585" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
-<path d="M1245 469 V570 H1050 V585" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
-<rect x="535" y="585" width="270" height="155" rx="14" fill="#092722" stroke="#14b8a6" stroke-width="2"/>
-<text x="670.0" y="612" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">ADAPTADOR PERSISTENCIA</text>
-<text x="670.0" y="636" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
+<path d="M1180 469 V565 H670 V600" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<path d="M1245 469 V580 H1050 V600" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<rect x="535" y="600" width="270" height="155" rx="14" fill="#092722" stroke="#14b8a6" stroke-width="2"/>
+<text x="670.0" y="627" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">ADAPTADOR PERSISTENCIA</text>
+<text x="670.0" y="651" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
 <tspan x="670.0" dy="0">Spring Data repository</tspan>
 <tspan x="670.0" dy="19">Dominio ↔ modelo BD mapper</tspan>
 <tspan x="670.0" dy="19">AlertDocument</tspan>
 <tspan x="670.0" dy="19">Mongo Document</tspan>
 </text>
-<text x="670.0" y="727" text-anchor="middle" fill="#14b8a6" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">adapter/out/persistence</text>
-<rect x="900" y="585" width="300" height="155" rx="14" fill="#092722" stroke="#14b8a6" stroke-width="2"/>
-<text x="1050.0" y="612" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">ADAPTADOR HTTP EXTERNO</text>
-<text x="1050.0" y="636" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
+<text x="670.0" y="742" text-anchor="middle" fill="#14b8a6" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">adapter/out/persistence</text>
+<rect x="900" y="600" width="300" height="155" rx="14" fill="#092722" stroke="#14b8a6" stroke-width="2"/>
+<text x="1050.0" y="627" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">ADAPTADOR HTTP EXTERNO</text>
+<text x="1050.0" y="651" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
 <tspan x="1050.0" dy="0">IncidentClient</tspan>
 <tspan x="1050.0" dy="19">Dominio ↔ DTO remoto mapper</tspan>
 <tspan x="1050.0" dy="19">HTTP client · timeout · errores</tspan>
 </text>
-<text x="1050.0" y="727" text-anchor="middle" fill="#14b8a6" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">adapter/out/client</text>
+<text x="1050.0" y="742" text-anchor="middle" fill="#14b8a6" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">adapter/out/client</text>
 <rect x="1340" y="555" width="220" height="125" rx="14" fill="#151e2b" stroke="#94a3b8" stroke-width="2"/>
 <text x="1450.0" y="582" text-anchor="middle" fill="#f4f7fb" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">BASE DE DATOS</text>
 <text x="1450.0" y="606" text-anchor="middle" fill="#b7c5d8" font-family="Consolas, Courier New, monospace" font-size="11" font-weight="400">
@@ -128,13 +125,10 @@
 <tspan x="1450.0" dy="19">request / response DTO</tspan>
 </text>
 <text x="1450.0" y="832" text-anchor="middle" fill="#94a3b8" font-family="Consolas, Courier New, monospace" font-size="10" font-weight="600">dependencia remota</text>
-<path d="M670 585 V560 H1320 V610 H1340" fill="none" stroke="#14b8a6" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
-<path d="M1200 660 H1260 V782 H1340" fill="none" stroke="#64748b" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
-<text x="1070" y="646" text-anchor="middle" fill="#86efac" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="500">puerto de salida</text>
-<text x="1300" y="646" text-anchor="middle" fill="#5eead4" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="500">persistencia</text>
-<text x="1300" y="766" text-anchor="middle" fill="#a5b4fc" font-family="Segoe UI, Arial, sans-serif" font-size="10" font-weight="500">HTTP</text>
-<path d="M620 430 V442" fill="none" stroke="#818cf8" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" class="flow"/>
-<path d="M693 442 V430" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" class="flow"/>
+<path d="M670 600 V570 H1320 V610 H1340" fill="none" stroke="#14b8a6" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<path d="M1200 675 H1260 V782 H1340" fill="none" stroke="#64748b" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)" class="flow"/>
+<path d="M620 430 V435" fill="none" stroke="#818cf8" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" class="flow"/>
+<path d="M693 435 V430" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" class="flow"/>
 <rect x="35" y="465" width="420" height="205" rx="16" fill="#111b2b" stroke="#33445a" stroke-width="1"/>
 <text x="58" y="496" text-anchor="start" fill="#dbe5f1" font-family="Consolas, Courier New, monospace" font-size="13" font-weight="700">RESPUESTA Y ERRORES</text>
 <text x="58" y="528" text-anchor="start" fill="#a9b8cb" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="400">
@@ -146,9 +140,10 @@
 </text>
 <rect x="35" y="700" width="420" height="110" rx="16" fill="#101c2b" stroke="#54657a" stroke-width="1"/>
 <text x="58" y="732" text-anchor="start" fill="#dbe5f1" font-family="Consolas, Courier New, monospace" font-size="13" font-weight="700">LÍMITES</text>
-<text x="58" y="758" text-anchor="start" fill="#a9b8cb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400">
-<tspan x="58" dy="0">Sin TenantContext por defecto. PRS4: aislamiento organizacional solo</tspan>
-<tspan x="58" dy="23">si aplica y validado por el servicio dueño de los datos.</tspan>
+<text x="58" y="752" text-anchor="start" fill="#a9b8cb" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="400">
+<tspan x="58" dy="0">Sin TenantContext por defecto.</tspan>
+<tspan x="58" dy="22">PRS4: aislamiento por organización, solo si aplica;</tspan>
+<tspan x="58" dy="22">valídalo en el servicio dueño de los datos.</tspan>
 </text>
 <rect x="35" y="845" width="1525" height="105" rx="14" fill="#101827" stroke="#26364b" stroke-width="1"/>
 <text x="58" y="875" text-anchor="start" fill="#fb923c" font-family="Consolas, Courier New, monospace" font-size="12" font-weight="700">MAPEO POR FRONTERA</text>
